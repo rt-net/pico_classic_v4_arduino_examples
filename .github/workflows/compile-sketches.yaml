@@ -19,10 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: arduino/setup-arduino-cli@v2
-      - run: |
-        arduino-cli lib install --git-url https://github.com/ESP32Async/AsyncTCP.git
-        arduino-cli lib install --git-url https://github.com/ESP32Async/ESPAsyncWebServer.git
       - uses: arduino/compile-sketches@v1
         with:
           enable-deltas-report: true
@@ -33,6 +29,11 @@ jobs:
             - name: esp32:esp32
               source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
               version: 3.1.3
+          libraries: |  # 依存パッケージを指定
+            - name: AsyncTCP
+              source-url: https://github.com/ESP32Async/AsyncTCP.git
+            - name: ESPAsyncWebServer
+              source-url: https://github.com/ESP32Async/ESPAsyncWebServer.git
           sketch-paths: |
             - pico_classic_v4_STEP1_LED
             - pico_classic_v4_STEP2_SWITCH
