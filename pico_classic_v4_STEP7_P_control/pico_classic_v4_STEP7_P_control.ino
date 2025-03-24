@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "run.h"
-#include "sensor.h"
 #include "SPI.h"
 #include "TMC5240.h"
+#include "run.h"
+#include "sensor.h"
 
 #define LED0 13
 #define LED1 14
@@ -42,7 +42,7 @@
 #define SPI_CLK 39
 #define SPI_MOSI 42
 #define SPI_MISO 41
-#define SPI_CS_L 40   //左モータ
+#define SPI_CS_L 40  //左モータ
 #define SPI_CS_R 3   //右モータ
 #define SPI_CS_J 46  //ジャイロ
 
@@ -51,7 +51,6 @@
 #define TREAD_WIDTH (65.00)
 
 #define MIN_SPEED 30
-
 
 //環境に合わせて変更する
 //ここから
@@ -69,14 +68,14 @@
 #define CON_WALL_KP (0.5)
 //ここまで
 
-
 hw_timer_t * g_timer0 = NULL;
 hw_timer_t * g_timer1 = NULL;
 portMUX_TYPE g_timer_mux = portMUX_INITIALIZER_UNLOCKED;
 
 //割り込み
 //目標値の更新周期1kHz
-void IRAM_ATTR onTimer0(void) {
+void IRAM_ATTR onTimer0(void)
+{
   portENTER_CRITICAL_ISR(&g_timer_mux);  //割り込み禁止
   controlInterrupt();
   portEXIT_CRITICAL_ISR(&g_timer_mux);  //割り込み許可
@@ -89,7 +88,8 @@ void IRAM_ATTR onTimer1(void)
   portEXIT_CRITICAL_ISR(&g_timer_mux);  //割り込み許可
 }
 
-void setup() {
+void setup()
+{
   // put your setup code here, to run once:
   pinMode(LED0, OUTPUT);
   pinMode(LED1, OUTPUT);
@@ -129,10 +129,10 @@ void setup() {
   delay(1);
   g_tmc5240.init();
   digitalWrite(MOTOR_EN, HIGH);
-
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
   while (digitalRead(SW_L) & digitalRead(SW_C) & digitalRead(SW_R)) {
     continue;

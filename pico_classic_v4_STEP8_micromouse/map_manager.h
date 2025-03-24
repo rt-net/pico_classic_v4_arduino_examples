@@ -31,21 +31,9 @@ typedef struct
   unsigned char north : 2;  //北の壁情報 bit1-0
 } t_wall;                   //壁情報を格納する構造体(ビットフィールド)
 
-typedef enum {
-  front,
-  right,
-  left,
-  rear,
-  loca_dir_error
-} t_local_direction;
+typedef enum { front, right, left, rear, loca_dir_error } t_local_direction;
 
-typedef enum {
-  north,
-  east,
-  south,
-  west,
-  glob_dir_error
-} t_global_direction;
+typedef enum { north, east, south, west, glob_dir_error } t_global_direction;
 
 typedef struct
 {
@@ -54,7 +42,8 @@ typedef struct
   t_global_direction dir;
 } t_position;
 
-class MapManager {
+class MapManager
+{
 public:
   MapManager();
 
@@ -63,20 +52,21 @@ public:
 
   void axisUpdate(void);
   void nextDir(t_local_direction dir);
-  t_local_direction nextDirGet(char x, char y, t_global_direction *dir);
-  t_local_direction nextDir2Get(short x, short y, t_global_direction *dir);
+  t_local_direction nextDirGet(char x, char y, t_global_direction * dir);
+  t_local_direction nextDir2Get(short x, short y, t_global_direction * dir);
   void positionInit(void);
   void wallDataSet(unsigned char x, unsigned char y, t_global_direction dir, char data);
   char wallDataGet(unsigned char x, unsigned char y, t_global_direction dir);
   void wallSet(bool IS_SEN_FR, bool IS_SEN_R, bool IS_SEN_L);
 
-
 private:
   unsigned short steps_map[MAZESIZE_X][MAZESIZE_Y];  //歩数マップ
   t_wall wall[MAZESIZE_X][MAZESIZE_Y];               //壁の情報を格納する構造体配列
 
-  void stepMapSet(unsigned char posX, unsigned char posY, t_global_direction l_global_dir, int *little, t_global_direction *now_dir, int *priority);
-  t_local_direction nextGdir(t_global_direction *p_global_dir);
+  void stepMapSet(
+    unsigned char posX, unsigned char posY, t_global_direction l_global_dir, int * little,
+    t_global_direction * now_dir, int * priority);
+  t_local_direction nextGdir(t_global_direction * p_global_dir);
   void searchMapMake(int x, int y);
   void map2Make(int x, int y);
   int priorityGet(unsigned char x, unsigned char y, t_global_direction dir);

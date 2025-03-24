@@ -16,7 +16,8 @@
 
 SEARCH g_search;
 
-void SEARCH::lefthand(void) {
+void SEARCH::lefthand(void)
+{
   g_run.accelerate(HALF_SECTION, g_run.search_speed);
 
   while (1) {
@@ -38,7 +39,8 @@ void SEARCH::lefthand(void) {
   }
 }
 
-void SEARCH::adachi(char gx, char gy) {
+void SEARCH::adachi(char gx, char gy)
+{
   t_global_direction glob_nextdir;
   t_local_direction temp_next_dir;
 
@@ -76,7 +78,7 @@ void SEARCH::adachi(char gx, char gy) {
       case left:
         g_run.decelerate(HALF_SECTION, g_run.search_speed);
         g_run.rotate(left, 1);
-        g_run.accelerate(HALF_SECTION,g_run.search_speed);
+        g_run.accelerate(HALF_SECTION, g_run.search_speed);
         break;
       case rear:
         g_run.decelerate(HALF_SECTION, g_run.search_speed);

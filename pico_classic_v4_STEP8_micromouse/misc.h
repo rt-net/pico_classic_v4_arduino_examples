@@ -12,22 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #ifndef SRC_MISC_H_
 #define SRC_MISC_H_
 
-
-class MISC {
-
+class MISC
+{
 public:
-  unsigned char mode_select;  
+  unsigned char mode_select;
   void modeExec(int mode);
-	short buttonInc(short _data, short limit, short limit_data);
-	short buttonDec(short _data, short limit, short limit_data);
-	void buttonOk(void);
-	void goalAppeal(void);
-	void errorAppeal(void);
-
+  short buttonInc(short _data, short limit, short limit_data);
+  short buttonDec(short _data, short limit, short limit_data);
+  void buttonOk(void);
+  void goalAppeal(void);
+  void errorAppeal(void);
 };
 
 extern MISC g_misc;

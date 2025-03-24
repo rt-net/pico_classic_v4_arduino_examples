@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #ifndef SRC_RUN_H_
 #define SRC_RUN_H_
 
@@ -36,21 +35,21 @@ typedef enum {
   MOT_BACK = 2
 } t_CW_CCW;
 
-class RUN {
+class RUN
+{
 private:
-
 public:
   volatile double accel;
   volatile double speed;
   volatile double speed_target_r;
-  volatile double speed_target_l;  
+  volatile double speed_target_l;
   volatile double upper_speed_limit;
   volatile double lower_speed_limit;
   float search_accel;
   short search_speed;
   short max_speed;
   float turn_accel;
-  t_control con_wall;  
+  t_control con_wall;
 
   float tire_diameter;
   float tread_width;
@@ -59,21 +58,20 @@ public:
   RUN();
   void interrupt(void);
   void counterClear(void);
-  void straight(int len, int init_speed, int max_sp, int finish_speed);  
+  void straight(int len, int init_speed, int max_sp, int finish_speed);
   void accelerate(int len, int finish_speed);
   void oneStep(int len, int init_speed);
   void decelerate(int len, float init_speed);
-  void rotate(t_local_direction dir, int times);  
+  void rotate(t_local_direction dir, int times);
 
 private:
-  int step_lr_len,step_lr;
+  int step_lr_len, step_lr;
   void dirSet(t_CW_CCW dir_left, t_CW_CCW dir_right);
   void speedSet(double l_speed, double r_speed);
   void stepGet(void);
-  void stay(float l_speed);  
-  void stop(void);  
+  void stay(float l_speed);
+  void stop(void);
 };
-
 
 extern RUN g_run;
 

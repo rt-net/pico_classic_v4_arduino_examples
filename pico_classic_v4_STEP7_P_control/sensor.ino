@@ -16,8 +16,8 @@
 
 SENSOR g_sensor;
 
-
-SENSOR::SENSOR() {  //コンストラクタ
+SENSOR::SENSOR()
+{  //コンストラクタ
   sen_r.ref = REF_SEN_R;
   sen_l.ref = REF_SEN_L;
 
@@ -31,12 +31,9 @@ SENSOR::SENSOR() {  //コンストラクタ
   sen_l.th_control = CONTH_SEN_L;
 }
 
-void sensorInterrupt(void) {
-  g_sensor.interrupt();
-}
+void sensorInterrupt(void) { g_sensor.interrupt(); }
 
-
-void SENSOR::interrupt(void) 
+void SENSOR::interrupt(void)
 {
   static char cnt = 0;
 
@@ -47,7 +44,7 @@ void SENSOR::interrupt(void)
         asm("nop \n");
       }
       sen_fr.value = analogRead(AD1);
-      digitalWrite(SLED_FR, LOW);  //LED消灯      
+      digitalWrite(SLED_FR, LOW);  //LED消灯
       if (sen_fr.value > sen_fr.th_wall) {
         sen_fr.is_wall = true;
       } else {
@@ -106,7 +103,7 @@ void SENSOR::interrupt(void)
         sen_l.error = 0;
         sen_l.is_control = false;
       }
-       battery_value = (double)analogReadMilliVolts(AD0) / 10.0 * (10.0 + 51.0);
+      battery_value = (double)analogReadMilliVolts(AD0) / 10.0 * (10.0 + 51.0);
       break;
     default:
       Serial.printf("sensor state error\n\r");

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #define SLED_FR 9
 #define SLED_FL 10
 #define SLED_R 11
@@ -30,10 +29,11 @@ volatile short g_sensor_value_r;
 volatile short g_sensor_value_l;
 volatile short g_battery_value;
 
-hw_timer_t* g_timer1 = NULL;
+hw_timer_t * g_timer1 = NULL;
 portMUX_TYPE g_timer_mux = portMUX_INITIALIZER_UNLOCKED;
 
-void IRAM_ATTR onTimer1(void) {
+void IRAM_ATTR onTimer1(void)
+{
   static char cnt = 0;
   portENTER_CRITICAL_ISR(&g_timer_mux);
   switch (cnt) {
@@ -79,7 +79,8 @@ void IRAM_ATTR onTimer1(void) {
   portEXIT_CRITICAL_ISR(&g_timer_mux);
 }
 
-void setup() {
+void setup()
+{
   // put your setup code here, to run once:
   //Sensor 発光off
   pinMode(SLED_FR, OUTPUT);
@@ -99,7 +100,8 @@ void setup() {
   timerStart(g_timer1);
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
   Serial.printf("r_sen  is %d\n\r", g_sensor_value_r);
   Serial.printf("fr_sen is %d\n\r", g_sensor_value_fr);

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #define LED0 13
 #define LED1 14
 #define LED2 47
@@ -37,7 +36,6 @@ void setup()
   pinMode(SW_R, INPUT_PULLUP);
 
   g_state_r = g_state_c = g_state_l = 0;
-
 }
 
 void loop()
@@ -51,7 +49,7 @@ void loop()
   }
   if (digitalRead(SW_C) == 0) {
     digitalWrite(LED1, (++g_state_c) & 0x01);
-    digitalWrite(LED2, (g_state_c)&0x01);
+    digitalWrite(LED2, (g_state_c) & 0x01);
   }
   if (digitalRead(SW_L) == 0) {
     digitalWrite(LED3, (++g_state_l) & 0x01);

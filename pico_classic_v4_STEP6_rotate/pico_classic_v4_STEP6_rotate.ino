@@ -30,7 +30,7 @@
 #define SPI_CLK 39
 #define SPI_MOSI 42
 #define SPI_MISO 41
-#define SPI_CS_L 40   //左モータ
+#define SPI_CS_L 40  //左モータ
 #define SPI_CS_R 3   //右モータ
 #define SPI_CS_J 46  //ジャイロ
 
@@ -40,21 +40,21 @@
 
 #define MIN_SPEED 30
 
-hw_timer_t* g_timer0 = NULL;
+hw_timer_t * g_timer0 = NULL;
 
 portMUX_TYPE g_timer_mux = portMUX_INITIALIZER_UNLOCKED;
 
-
 //割り込み
 //目標値の更新周期1kHz
-void IRAM_ATTR onTimer0(void) {
+void IRAM_ATTR onTimer0(void)
+{
   portENTER_CRITICAL_ISR(&g_timer_mux);  //割り込み禁止
   controlInterrupt();
   portEXIT_CRITICAL_ISR(&g_timer_mux);  //割り込み許可
 }
 
-
-void setup() {
+void setup()
+{
   // put your setup code here, to run once:
   pinMode(LED0, OUTPUT);
   pinMode(LED1, OUTPUT);
@@ -78,10 +78,10 @@ void setup() {
   delay(1);
   g_tmc5240.init();
   digitalWrite(MOTOR_EN, HIGH);
-
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
   while (digitalRead(SW_L) & digitalRead(SW_C) & digitalRead(SW_R)) {
     delay(1);

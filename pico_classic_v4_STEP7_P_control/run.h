@@ -37,19 +37,18 @@ typedef enum {
   MOT_BACK = 2
 } t_CW_CCW;
 
-class RUN {
+class RUN
+{
 private:
-
 public:
   volatile double accel;
   volatile double speed;
   volatile double speed_target_r;
-  volatile double speed_target_l;   
+  volatile double speed_target_l;
   volatile double max_speed;
   volatile double min_speed;
 
   t_control con_wall;
-
 
   RUN();
   void interrupt(void);
@@ -64,9 +63,8 @@ public:
   void rotate(t_local_direction dir, int times);
 
 private:
-  int step_lr_len,step_lr;
+  int step_lr_len, step_lr;
 };
-
 
 extern RUN g_run;
 

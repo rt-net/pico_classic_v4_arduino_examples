@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #define LED0 13
 #define LED1 14
 #define LED2 47

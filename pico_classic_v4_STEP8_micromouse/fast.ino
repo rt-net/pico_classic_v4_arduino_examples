@@ -16,7 +16,8 @@
 
 FAST g_fast;
 
-void FAST::run(short gx, short gy) {
+void FAST::run(short gx, short gy)
+{
   t_global_direction glob_nextdir;
   int straight_count = 0;
 
@@ -46,8 +47,9 @@ void FAST::run(short gx, short gy) {
         straight_count++;
         break;
       case right:
-        if(straight_count>0){
-          g_run.straight(straight_count * SECTION, g_run.search_speed, g_run.max_speed, g_run.search_speed);
+        if (straight_count > 0) {
+          g_run.straight(
+            straight_count * SECTION, g_run.search_speed, g_run.max_speed, g_run.search_speed);
           straight_count = 0;
         }
         g_run.decelerate(HALF_SECTION, g_run.search_speed);
@@ -55,8 +57,9 @@ void FAST::run(short gx, short gy) {
         g_run.accelerate(HALF_SECTION, g_run.search_speed);
         break;
       case left:
-        if(straight_count>0){
-          g_run.straight(straight_count * SECTION, g_run.search_speed, g_run.max_speed, g_run.search_speed);
+        if (straight_count > 0) {
+          g_run.straight(
+            straight_count * SECTION, g_run.search_speed, g_run.max_speed, g_run.search_speed);
           straight_count = 0;
         }
         g_run.decelerate(HALF_SECTION, g_run.search_speed);
@@ -70,7 +73,8 @@ void FAST::run(short gx, short gy) {
     g_map.axisUpdate();
   }
   if (straight_count > 0) {
-    g_run.straight(straight_count * SECTION, g_run.search_speed, g_run.max_speed, g_run.search_speed);
+    g_run.straight(
+      straight_count * SECTION, g_run.search_speed, g_run.max_speed, g_run.search_speed);
   }
   g_run.decelerate(HALF_SECTION, g_run.search_speed);
 }

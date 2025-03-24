@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #ifndef TMC5240_H_
 #define TMC5240_H_
 
@@ -102,19 +101,15 @@
 #define TMC5240_SG4_RESULT 0x75
 #define TMC5240_SG4_IND 0x76
 
-
-class TMC5240 {
+class TMC5240
+{
 private:
-
 public:
   unsigned int readXactual(void);
   void write(unsigned char add, unsigned int data_l, unsigned int data_r);
   void init(void);
 };
 
-
 extern TMC5240 g_tmc5240;
-
-
 
 #endif  // TMC5240_H_

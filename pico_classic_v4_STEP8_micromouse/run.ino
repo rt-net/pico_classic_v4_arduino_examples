@@ -12,26 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #include "TMC5240.h"
 #include "parameter.h"
 #include "run.h"
 
 RUN g_run;
 
-
-
-RUN::RUN() {
+RUN::RUN()
+{
   speed = 0.0;
   accel = 0.0;
 }
 
 //割り込み
-void controlInterrupt(void) {
-  g_run.interrupt();
-}
+void controlInterrupt(void) { g_run.interrupt(); }
 
-void RUN::interrupt(void) {  //割り込み内からコール
+void RUN::interrupt(void)
+{  //割り込み内からコール
 
   speed += accel;
 
@@ -67,20 +64,22 @@ void RUN::interrupt(void) {  //割り込み内からコール
   if (speed_target_l < MIN_SPEED) speed_target_l = MIN_SPEED;
 }
 
-
-void RUN::dirSet(t_CW_CCW dir_left, t_CW_CCW dir_right) {
+void RUN::dirSet(t_CW_CCW dir_left, t_CW_CCW dir_right)
+{
   g_tmc5240.write(TMC5240_RAMPMODE, dir_left, dir_right);
 }
 
-void RUN::counterClear(void) {
-  g_tmc5240.write(TMC5240_XACTUAL, 0, 0);
+void RUN::counterClear(void) { g_tmc5240.write(TMC5240_XACTUAL, 0, 0); }
+
+void RUN::speedSet(double l_speed, double r_speed)
+{
+  g_tmc5240.write(
+    TMC5240_VMAX, (unsigned int)(l_speed / (pulse * 0.787)),
+    (unsigned int)(r_speed / (pulse * 0.787)));
 }
 
-void RUN::speedSet(double l_speed, double r_speed) {
-  g_tmc5240.write(TMC5240_VMAX, (unsigned int)(l_speed / (pulse * 0.787)), (unsigned int)(r_speed / (pulse * 0.787)));
-}
-
-void RUN::stay(float l_speed) {
+void RUN::stay(float l_speed)
+{
   controlInterruptStop();
   upper_speed_limit = lower_speed_limit = speed = (double)l_speed;
   accel = 0.0;
@@ -89,18 +88,20 @@ void RUN::stay(float l_speed) {
   controlInterruptStart();
 }
 
-void RUN::stepGet(void) {
+void RUN::stepGet(void)
+{
   step_lr = g_tmc5240.readXactual();
   step_lr_len = (int)((float)step_lr / 2.0 * pulse);
 }
 
-void RUN::stop(void) {
+void RUN::stop(void)
+{
   g_tmc5240.write(TMC5240_VMAX, 0, 0);
   delay(300);
 }
 
-
-void RUN::straight(int len, int init_speed, int max_sp, int finish_speed) {
+void RUN::straight(int len, int init_speed, int max_sp, int finish_speed)
+{
   int obj_step;
 
   controlInterruptStop();
@@ -126,7 +127,9 @@ void RUN::straight(int len, int init_speed, int max_sp, int finish_speed) {
   while (1) {
     stepGet();
     speedSet(speed_target_l, speed_target_r);
-    if ((int)(len - step_lr_len) < (int)(((speed * speed) - (lower_speed_limit * lower_speed_limit)) / (2.0 * 1000.0 * accel))) {
+    if (
+      (int)(len - step_lr_len) <
+      (int)(((speed * speed) - (lower_speed_limit * lower_speed_limit)) / (2.0 * 1000.0 * accel))) {
       break;
     }
   }
@@ -148,7 +151,8 @@ void RUN::straight(int len, int init_speed, int max_sp, int finish_speed) {
   }
 }
 
-void RUN::accelerate(int len, int finish_speed) {
+void RUN::accelerate(int len, int finish_speed)
+{
   int obj_step;
 
   controlInterruptStop();
@@ -172,7 +176,8 @@ void RUN::accelerate(int len, int finish_speed) {
 
   stay(finish_speed);
 }
-void RUN::oneStep(int len, int init_speed) {
+void RUN::oneStep(int len, int init_speed)
+{
   int obj_step;
 
   controlInterruptStop();
@@ -195,7 +200,8 @@ void RUN::oneStep(int len, int init_speed) {
   stay(init_speed);
 }
 
-void RUN::decelerate(int len, float init_speed) {
+void RUN::decelerate(int len, float init_speed)
+{
   int obj_step;
 
   controlInterruptStop();
@@ -211,7 +217,9 @@ void RUN::decelerate(int len, float init_speed) {
   while (1) {
     stepGet();
     speedSet(speed_target_l, speed_target_r);
-    if ((int)(len - step_lr_len) < (int)(((speed * speed) - (MIN_SPEED * MIN_SPEED)) / (2.0 * 1000.0 * accel))) {
+    if (
+      (int)(len - step_lr_len) <
+      (int)(((speed * speed) - (MIN_SPEED * MIN_SPEED)) / (2.0 * 1000.0 * accel))) {
       break;
     }
   }
@@ -229,8 +237,8 @@ void RUN::decelerate(int len, float init_speed) {
   stop();
 }
 
-
-void RUN::rotate(t_local_direction dir, int times) {
+void RUN::rotate(t_local_direction dir, int times)
+{
   int obj_step;
 
   controlInterruptStop();
@@ -257,7 +265,9 @@ void RUN::rotate(t_local_direction dir, int times) {
   while (1) {
     stepGet();
     speedSet(speed_target_l, speed_target_r);
-    if ((int)((tread_width * PI / 4.0 * times) - step_lr_len) < (int)(((speed * speed) - (MIN_SPEED * MIN_SPEED)) / (2.0 * 1000.0 * accel))) {
+    if (
+      (int)((tread_width * PI / 4.0 * times) - step_lr_len) <
+      (int)(((speed * speed) - (MIN_SPEED * MIN_SPEED)) / (2.0 * 1000.0 * accel))) {
       break;
     }
   }
