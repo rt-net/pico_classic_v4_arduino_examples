@@ -16,7 +16,8 @@
 
 ADJUST g_adjust;
 
-void ADJUST::mapView(void) {
+void ADJUST::mapView(void)
+{
   Serial.printf("\x1b[2j");
   Serial.printf("\x1b[0;0H");
   Serial.printf("\n\r+");
@@ -89,7 +90,8 @@ void ADJUST::mapView(void) {
   }
 }
 
-void ADJUST::adcView(void) {
+void ADJUST::adcView(void)
+{
   motorDisable();
 
   while (1) {
@@ -105,19 +107,22 @@ void ADJUST::adcView(void) {
   }
 }
 
-void ADJUST::straightCheck(int section_check) {
+void ADJUST::straightCheck(int section_check)
+{
   motorEnable();
   delay(1000);
   g_run.accelerate(HALF_SECTION, g_run.search_speed);
   if (section_check > 1) {
-    g_run.straight(SECTION * (section_check - 1), g_run.search_speed, g_run.max_speed, g_run.search_speed);
+    g_run.straight(
+      SECTION * (section_check - 1), g_run.search_speed, g_run.max_speed, g_run.search_speed);
   }
   g_run.decelerate(HALF_SECTION, g_run.search_speed);
 
   motorDisable();
 }
 
-void ADJUST::rotationCheck(void) {
+void ADJUST::rotationCheck(void)
+{
   motorEnable();
   delay(1000);
   for (int i = 0; i < 8; i++) {
@@ -126,7 +131,8 @@ void ADJUST::rotationCheck(void) {
   motorDisable();
 }
 
-void ADJUST::menu(void) {
+void ADJUST::menu(void)
+{
   unsigned char l_mode = 1;
   char LED3_data;
   char sw;
@@ -160,7 +166,8 @@ void ADJUST::menu(void) {
   }
 }
 
-unsigned char ADJUST::modeExec(unsigned char l_mode) {
+unsigned char ADJUST::modeExec(unsigned char l_mode)
+{
   motorDisable();
   switch (l_mode) {
     case 1:

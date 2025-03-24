@@ -12,24 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "adjust.h"
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
+#include <FS.h>
+#include <SPI.h>
+#include <WiFi.h>
+
+#include "SPIFFS.h"
+#include "TMC5240.h"
+#include "adjust.h"
 #include "device.h"
 #include "fast.h"
-#include <FS.h>
-#include "SPIFFS.h"
 #include "map_manager.h"
 #include "misc.h"
 #include "parameter.h"
 #include "run.h"
 #include "search.h"
 #include "sensor.h"
-#include <SPI.h>
-#include "TMC5240.h"
-#include <WiFi.h>
 
-void setup() {
+void setup()
+{
   // put your setup code here, to run once:
   deviceInit();
   flashBegin();
@@ -44,7 +46,8 @@ void setup() {
   g_misc.mode_select = 1;
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
   ledSet(g_misc.mode_select);
   switch (switchGet()) {

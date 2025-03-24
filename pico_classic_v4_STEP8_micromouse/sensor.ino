@@ -16,11 +16,9 @@
 
 SENSOR g_sensor;
 
-void sensorInterrupt(void) {
-  g_sensor.interrupt();
-}
+void sensorInterrupt(void) { g_sensor.interrupt(); }
 
-void SENSOR::interrupt(void) 
+void SENSOR::interrupt(void)
 {
   static char cnt = 0;
   static char bled_cnt = 0;
@@ -85,7 +83,7 @@ void SENSOR::interrupt(void)
       } else {
         bledSet(2);
       }
-      if(battery_value < BATT_MIN){
+      if (battery_value < BATT_MIN) {
         buzzerEnable(400);
         ledSet(0);
       }

@@ -104,19 +104,15 @@
 #define TMC5240_PULSE (TIRE_DIAMETER * PI / (200.0 * microstep))
 #define TMC5240_VELOCITY (TMC5240_PULSE * 0.787)  //13200000/2/2^23=0.787 +50c
 
-
-class TMC5240 {
+class TMC5240
+{
 private:
-
 public:
   unsigned int readXactual(void);
   void write(unsigned char add, unsigned int data_l, unsigned int data_r);
   void init(void);
 };
 
-
 extern TMC5240 g_tmc5240;
-
-
 
 #endif  // TMC5240_H_

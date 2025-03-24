@@ -15,10 +15,11 @@
 #ifndef SRC_FAST_H_
 #define SRC_FAST_H_
 
-class FAST {
+class FAST
+{
 public:
-
   void run(short gx, short gy);
+
 private:
 };
 

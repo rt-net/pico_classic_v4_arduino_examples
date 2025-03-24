@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #ifndef SRC_ADJUST_H_
 #define SRC_ADJUST_H_
 
-class ADJUST {
+class ADJUST
+{
 public:
   void menu(void);
   void mapView(void);

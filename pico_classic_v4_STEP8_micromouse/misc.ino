@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #include "misc.h"
 
 MISC g_misc;
@@ -77,7 +76,6 @@ void MISC::goalAppeal(void)  //ゴールしたことをアピールする
   delay(500);
   motorEnable();
 }
-
 
 void MISC::modeExec(int mode)
 {
@@ -145,4 +143,3 @@ void MISC::modeExec(int mode)
   }
   motorDisable();
 }
-
