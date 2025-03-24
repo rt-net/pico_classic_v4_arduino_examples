@@ -1,4 +1,8 @@
 # pico_classic4_arduino_examples
+
+[![Compile Sketches](https://github.com/rt-net/pico_classic_v4_arduino_examples/actions/workflows/compile-sketches.yaml/badge.svg)](https://github.com/rt-net/pico_classic_v4_arduino_examples/actions/workflows/compile-sketches.yaml)
+[![Lint](https://github.com/rt-net/pico_classic_v4_arduino_examples/actions/workflows/lint.yaml/badge.svg)](https://github.com/rt-net/pico_classic_v4_arduino_examples/actions/workflows/lint.yaml)
+
 ![pico_classic4](images/PiCo_Classic4_image.jpg)
 
 Pi:Co Classic4用 Arduino サンプルスケッチ集です。
